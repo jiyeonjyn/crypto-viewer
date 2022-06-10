@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/crypto-viewer/static/js/main.d51e30a5.js",
+    "index.html": "/crypto-viewer/index.html",
+    "main.d51e30a5.js.map": "/crypto-viewer/static/js/main.d51e30a5.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.d51e30a5.js"
+  ]
+}
