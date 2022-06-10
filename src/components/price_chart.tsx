@@ -19,25 +19,21 @@ const PriceChart = ({ isLightTheme }: Props) => {
 
   const { isLoading, data } = useQuery<ICoinOHLCV[]>(
     ['coin-ohlcv', coinId],
-    () => fetchCoinOHLCV(coinId),
-    {
-      refetchInterval: 10000,
-    }
+    () => fetchCoinOHLCV(coinId)
   );
 
-  const chartData = data?.length
-    ? data.map((price) => {
-        return {
-          x: price.time_close.slice(0, 10),
-          y: [
-            price.open.toFixed(3),
-            price.high.toFixed(3),
-            price.low.toFixed(3),
-            price.close.toFixed(3),
-          ],
-        };
-      })
-    : [];
+  const flatData = data?.flat() ?? [];
+  const chartData = flatData.map((price) => {
+    return {
+      x: price.time_close.slice(0, 10),
+      y: [
+        price.open.toFixed(3),
+        price.high.toFixed(3),
+        price.low.toFixed(3),
+        price.close.toFixed(3),
+      ],
+    };
+  });
 
   // [[Timestamp], [O, H, L, C]]
   return (

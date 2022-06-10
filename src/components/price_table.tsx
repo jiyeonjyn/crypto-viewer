@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { ICoinPrice, ICoinTickers } from '../interfaces';
+import { ICoinTickers } from '../interfaces';
 import { fetchCoinTickers } from '../service/api';
 
 const PriceList = styled.ul``;
@@ -53,7 +53,7 @@ const PriceTable = () => {
       refetchInterval: 10000,
     }
   );
-  const price = data?.quotes.USD ?? ({} as ICoinPrice);
+  const price = data?.quotes.USD;
 
   return (
     <>
@@ -64,60 +64,60 @@ const PriceTable = () => {
           <PriceItem>
             <ItemTitle>Price</ItemTitle>
             <ItemValue>
-              ${Number(price.price.toFixed(3)).toLocaleString()}
+              ${Number(price?.price.toFixed(3)).toLocaleString()}
             </ItemValue>
           </PriceItem>
           <PriceItem depth={2}>
             <ItemTitle>1h</ItemTitle>
-            <ItemValue value={price.percent_change_1h}>
-              {price.percent_change_1h}%
+            <ItemValue value={price?.percent_change_1h}>
+              {price?.percent_change_1h}%
             </ItemValue>
           </PriceItem>
           <PriceItem depth={2}>
             <ItemTitle>24h</ItemTitle>
-            <ItemValue value={price.percent_change_24h}>
-              {price.percent_change_24h}%
+            <ItemValue value={price?.percent_change_24h}>
+              {price?.percent_change_24h}%
             </ItemValue>
           </PriceItem>
           <PriceItem depth={2}>
             <ItemTitle>7d</ItemTitle>
-            <ItemValue value={price.percent_change_7d}>
-              {price.percent_change_7d}%
+            <ItemValue value={price?.percent_change_7d}>
+              {price?.percent_change_7d}%
             </ItemValue>
           </PriceItem>
           <PriceItem>
             <ItemTitle>Trading Volume(24h)</ItemTitle>
             <ItemValue>
-              ${Number(price.volume_24h.toFixed(0)).toLocaleString()}
+              ${Number(price?.volume_24h.toFixed(0)).toLocaleString()}
             </ItemValue>
           </PriceItem>
           <PriceItem depth={2}>
             <ItemTitle>24h</ItemTitle>
-            <ItemValue value={price.volume_24h_change_24h}>
-              {price.volume_24h_change_24h}%
+            <ItemValue value={price?.volume_24h_change_24h}>
+              {price?.volume_24h_change_24h}%
             </ItemValue>
           </PriceItem>
           <PriceItem>
             <ItemTitle>Market Capitalization</ItemTitle>
-            <ItemValue>${price.market_cap.toLocaleString()}</ItemValue>
+            <ItemValue>${price?.market_cap.toLocaleString()}</ItemValue>
           </PriceItem>
           <PriceItem depth={2}>
             <ItemTitle>24h</ItemTitle>
-            <ItemValue value={price.market_cap_change_24h}>
-              {price.market_cap_change_24h}%
+            <ItemValue value={price?.market_cap_change_24h}>
+              {price?.market_cap_change_24h}%
             </ItemValue>
           </PriceItem>
           <PriceItem>
             <ItemTitle>All-Time High</ItemTitle>
             <ItemValue>
-              ${Number(price.ath_price.toFixed(3)).toLocaleString()}
-              <div>({price.ath_date.slice(0, 10)})</div>
+              ${Number(price?.ath_price.toFixed(3)).toLocaleString()}
+              <div>({price?.ath_date.slice(0, 10)})</div>
             </ItemValue>
           </PriceItem>
           <PriceItem>
             <ItemTitle>Price Now / All-Time High</ItemTitle>
-            <ItemValue value={price.percent_from_price_ath}>
-              {price.percent_from_price_ath}%
+            <ItemValue value={price?.percent_from_price_ath}>
+              {price?.percent_from_price_ath}%
             </ItemValue>
           </PriceItem>
         </PriceList>

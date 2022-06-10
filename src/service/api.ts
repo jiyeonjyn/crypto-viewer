@@ -22,11 +22,19 @@ export const fetchCoinTickers = (coinId: string) => {
 
 // 기간별 코인 시세
 // OHLCV : Open/High/Low/Close values(prices)
+// export const fetchCoinOHLCV = (coinId: string) => {
+//   const endDate = Math.floor(Date.now() / 1000);
+//   const startDate = endDate - 60 * 60 * 24 * 6;
+//   return fetch(
+//     `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`
+//   ) //
+//     .then((response) => response.json());
+// };
+
 export const fetchCoinOHLCV = (coinId: string) => {
-  const endDate = Math.floor(Date.now() / 1000);
-  const startDate = endDate - 60 * 60 * 24 * 6; // 1주
-  return fetch(
-    `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`
-  ) //
+  const yesterdayOHLCV = fetch(`${BASE_URL}/coins/${coinId}/ohlcv/latest`) //
     .then((response) => response.json());
+  const todayOHLCV = fetch(`${BASE_URL}/coins/${coinId}/ohlcv/today`) //
+    .then((response) => response.json());
+  return Promise.all([yesterdayOHLCV, todayOHLCV]);
 };
