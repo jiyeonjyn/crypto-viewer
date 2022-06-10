@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import SwitchButton from './switch_button';
 
 const Container = styled.header`
-  height: 15vh;
+  padding: 4em 0;
   display: flex;
   justify-content: center;
   align-items: center;
