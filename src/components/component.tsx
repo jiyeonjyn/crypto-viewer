@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
-const Component: React.FC = () => <h1>component</h1>;
+const Component = () => <h1>Component</h1>;
 
 export default Component;
