@@ -6,6 +6,7 @@ import { ICoin } from '../interfaces';
 import { fetchCoinList } from '../service/api';
 import { useQuery } from 'react-query';
 import Header from '../components/header';
+import defaultImg from '../path/logo192.png';
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -51,6 +52,8 @@ interface Props {
   switchTheme: () => void;
 }
 
+const handleError = (e: any) => (e.target.src = defaultImg);
+
 const CoinList = ({ switchTheme }: Props) => {
   const { isLoading, data } = useQuery<ICoin[]>('coin-list', fetchCoinList);
   return (
@@ -69,7 +72,9 @@ const CoinList = ({ switchTheme }: Props) => {
             <Coin key={coin.id}>
               <Link to={coin.id} state={{ name: coin.name }}>
                 <Img
-                  src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+                  src={`https://cryptocurrencyliveprices.com/img/${coin.id.toLowerCase()}.png`}
+                  alt={coin.id}
+                  onError={handleError}
                 />
                 {coin.name} &rarr;
               </Link>
